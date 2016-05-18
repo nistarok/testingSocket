@@ -1,26 +1,54 @@
 import socket
+import time
 from simplecrypt import encrypt, decrypt
 
 ip = raw_input('Manda o ip do servidor pa nois: ')
 port = 7000
 addr = ((ip,port))
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+destination_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-count_try_connection = 0
-connected = False
+destination_connected = False
+try:
+    dest_addr = ((ip,7002))
+    destination_socket.connect(dest_addr)
+    destination_connected = True
+except:
+    print "Ei amiguinho! Nao esquece de executar o destino pra descriptografar"
 
-while (count_try_connection and connected is not True ):
-    try:
-        client_socket.connect(addr)
-        connected = True
-    except:
-        count_try_connection +=1
 
-if connected:
-    msg = raw_input('Manda a mensagem pa nois: ')
+if destination_connected:
+    count_try_connection = 0
+    connected = False
 
-    ciphertext = encrypt('password', msg)
-    deciphertext = decrypt('password', ciphertext)
-    print deciphertext
-else:
-    print 'Nem consegui conectar no servidor :( '
+    while (count_try_connection < 5 and connected is not True ):
+        try:
+            client_socket.connect(addr)
+            connected = True
+        except:
+            time.sleep(5)
+            count_try_connection +=1
+
+    if not connected:
+        count_try_connection = 0
+        port = 7001
+        addr = ((ip,port))
+        while (count_try_connection < 5 and connected is not True ):
+            try:
+                client_socket.connect(addr)
+                connected = True
+            except:
+                time.sleep(5)
+                count_try_connection +=1
+
+    if connected:
+        msg = ""
+        while not msg:
+            msg = raw_input('Manda a mensagem pa nois: ')
+            if not msg:
+                print 'Escreve uma mensagem pa nois tio'
+        client_socket.send(msg)
+        data = client_socket.recv(1024)
+        print "Recebi a mensagem criptografada, mandando pro destino"
+    else:
+        print 'Nem consegui conectar no servidor :( '
