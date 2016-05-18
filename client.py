@@ -22,7 +22,7 @@ if destination_connected:
     print 'Tentando conectar no servidor de criptografia'
     while (count_try_connection < 5 and connected is not True ):
         try:
-            print 'Tentativa '+count_try_connection+' no servidor 1'
+            print 'Tentativa '+str(count_try_connection+1)+' no servidor 1'
             client_socket.connect(addr)
             connected = True
         except:
@@ -35,7 +35,7 @@ if destination_connected:
         addr = ((ip,port))
         while (count_try_connection < 5 and connected is not True ):
             try:
-                print 'Tentativa '+count_try_connection+' no servidor 2'
+                print 'Tentativa '+str(count_try_connection+1)+' no servidor 2'
                 client_socket.connect(addr)
                 connected = True
             except:
