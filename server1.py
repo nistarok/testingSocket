@@ -15,7 +15,8 @@ print('Aguardando uma mensagem do cliente')
 
 # while not recebe:
 recebe = con.recv(1024)
-if recebe:
-    ciphertext = encrypt('password', recebe)
-    con.send(ciphertext)
+
+ciphertext = encrypt('password', recebe)
+con.send(ciphertext)
+print "Recebi criptografei e respondi"
 serv_socket.close()

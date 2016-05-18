@@ -10,12 +10,13 @@ serv_socket.bind(addr)
 serv_socket.listen(10) #limite de conexoes
 print('Aguardando conexao...')
 con, cliente = serv_socket.accept()
-print('Conectado no servidor 2\n')
+print('Conectado no servidor 2')
 print('Aguardando uma mensagem do cliente')
 
-while not recebe:
-    recebe = con.recv(1024)
-if recebe:
-    ciphertext = encrypt('password', recebe)
-    con.send(ciphertext)
+# while not recebe:
+recebe = con.recv(1024)
+
+ciphertext = encrypt('password', recebe)
+con.send(ciphertext)
+print "Recebi criptografei e respondi"
 serv_socket.close()

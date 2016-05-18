@@ -49,6 +49,12 @@ if destination_connected:
                 print 'Escreve uma mensagem pa nois tio'
         client_socket.send(msg)
         data = client_socket.recv(1024)
-        print "Recebi a mensagem criptografada, mandando pro destino"
+
+        print "Recebi a mensagem criptografada, mandando pro destino descriptografar"
+        destination_socket.send(data)
+
+        print "Recebi a mensagem descriptografada"
+        final_msg = destination_socket.recv(1024)
+        print final_msg
     else:
         print 'Nem consegui conectar no servidor :( '

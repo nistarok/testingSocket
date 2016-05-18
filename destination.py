@@ -13,11 +13,11 @@ con, cliente = serv_socket.accept()
 print('O destino ta ligado \n')
 print('Aguardando uma mensagem para descriptografar')
 
-while not recebe:
-    recebe = con.recv(1024)
+# while not recebe:
+recebe = con.recv(1024)
 if recebe:
     deciphertext = decrypt('password', recebe)
-    print deciphertext
+    print " A mensagem eh : "+deciphertext
     con.send(deciphertext)
 
 serv_socket.close()
