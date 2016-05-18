@@ -1,6 +1,5 @@
 import socket
 import time
-from simplecrypt import encrypt, decrypt
 
 ip = raw_input('Manda o ip do servidor pa nois: ')
 port = 7000
@@ -53,8 +52,8 @@ if destination_connected:
         print "Recebi a mensagem criptografada, mandando pro destino descriptografar"
         destination_socket.send(data)
 
-        print "Recebi a mensagem descriptografada"
         final_msg = destination_socket.recv(1024)
-        print final_msg
+        print "Recebi a mensagem descriptografada"
+        print "Mensagem descriptografada: "+final_msg
     else:
         print 'Nem consegui conectar no servidor :( '

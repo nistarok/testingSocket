@@ -16,7 +16,7 @@ print('Aguardando uma mensagem para descriptografar')
 # while not recebe:
 recebe = con.recv(1024)
 if recebe:
-    deciphertext = decrypt('password', recebe)
+    deciphertext = decrypt('palavrapasse', recebe)
     print " A mensagem eh : "+deciphertext
     con.send(deciphertext)
 
