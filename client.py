@@ -33,6 +33,7 @@ if destination_connected:
         count_try_connection = 0
         port = 7001
         addr = ((ip,port))
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         while (count_try_connection < 5 and connected is not True ):
             try:
                 print 'Tentativa '+str(count_try_connection+1)+' no servidor 2'
@@ -50,11 +51,13 @@ if destination_connected:
                 print 'Escreve uma mensagem pa nois tio'
         client_socket.send(msg)
         data = client_socket.recv(1024)
+        client_socket.close()
 
         print "Recebi a mensagem criptografada, mandando pro destino descriptografar"
         destination_socket.send(data)
 
         final_msg = destination_socket.recv(1024)
+        destination_socket.close()
         print "Recebi a mensagem descriptografada"
         print "Mensagem descriptografada: "+final_msg
     else:

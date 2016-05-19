@@ -6,6 +6,7 @@ port = 7001
 recebe = "" #var. que recebe a mensagem
 addr = (host, port)
 serv_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serv_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 serv_socket.bind(addr)
 serv_socket.listen(10) #limite de conexoes
 print('Aguardando conexao...')
