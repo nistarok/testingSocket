@@ -1,1 +1,1 @@
-Pensa num bagulho loco
+teste socket matéria de redes
